@@ -19,5 +19,12 @@ The web page should display the following information, in the specified language
 
 Follow best practices (both in your chosen programming language and SPARQL)
 
+## Limitations
+
+TODO: Mediate into Solr index for better functionality (autocomplete rather than dropdown, no network latency)
+TODO: Show/hide English translation
+TODO: Support pinyin and traditional characters
+TODO: Improve filtering of occupations - many values are nonsense
+
 
 

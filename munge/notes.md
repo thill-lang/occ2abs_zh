@@ -1,4 +1,4 @@
-# Query to retrieve all occupations (i) with Chinese labels (ii) fulfilled by more than 10 individuals who (iii) have Chinese abstracts available.
+Query to retrieve all occupations (i) with Chinese labels (ii) fulfilled by more than 10 individuals who (iii) have Chinese abstracts available.
 
 `select distinct ?occupation ?occtag count(?person) {
  ?person <http://dbpedia.org/ontology/occupation> ?occupation.
@@ -13,14 +13,15 @@
 GROUP BY ?occupation ?occtag
 HAVING (COUNT(?person) > 9)`
 
-TODO: Yields bad values:
 
 http://dbpedia.org/resource/Short_story
 http://dbpedia.org/resource/Legislative_council
 http://dbpedia.org/resource/Invention
 
 
-# Query to retrieve the names and abstracts of all persons (i) practicing an occupation and (ii) who have these attributes available in Chinese
+Query to retrieve the names and abstracts of all persons 
+(i) practicing an occupation and 
+(ii) who have these attributes available in Chinese
 
 select distinct ?name ?abstract {
  ?person <http://dbpedia.org/ontology/occupation> ?occupation.
@@ -31,4 +32,4 @@ select distinct ?name ?abstract {
  FILTER(LANG(?name) = 'zh')
 }
 
-API for pinyin, traditional characters here: but need to assess
+APIs for pinyin, traditional characters available: but need to assess

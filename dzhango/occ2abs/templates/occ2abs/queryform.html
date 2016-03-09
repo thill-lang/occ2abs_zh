@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="{% static 'occ2abs/js/jquery.min.js' %}"></script>
+    <script src="{% static 'occ2abs/js/show_results.js' %}"></script>
+    <title>Occupation to Abstract in ZH</title>
+    <style type="text/css">
+        body{ font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; }
+        table#results-table { visibility: hidden; font-size:16px; font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; border-collapse: collapse;border-spacing: 0;width: 100%; }
+        #results-table td, #results-table th { border: 1px solid #ddd; text-align: left; padding: 8px; }
+        #results-table tr:nth-child(even){background-color: #f2f2f2}
+        #results-table th { padding-top: 11px; padding-bottom: 11px; background-color: #4CAF50; color: white; }
+        #sort-selector li { list-style-type: none; display: inline; }
+        h1 .zh-cn{ font-size: 90%; }
+    </style>
+</head>
+<body>
+<h1>Occupation to Abstract | <span class="zh-cn">占用变得摘要</span> (zh-cn)</h1>
+<h2 id="err-msg">
+    {% if error_msg %}
+    <span style="color:red">Error: </span>{{ error_msg }}
+    {% endif %}
+</h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <table id="results-table">
+        <thead>
+        <tr>
+        <th class="name-zh-simple" scope="col">Name (Simplified Characters)<br/><br/>名义(简体中文)</th>
+        <th class="name-en" scope="col">Name (English)<br/><br/>名义(英文)</th>
+        <th class="abs-zh-simple" scope="col">Abstract (Simplified Characters)<br/><br/>摘要(简体中文)</th>
+        <th class="abs-en" scope="col">Abstract (English)<br/><br/>摘要(英文)</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</body>
+</html>

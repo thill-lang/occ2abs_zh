@@ -17,7 +17,7 @@ The web page should display the following information, in the specified language
 
 • abstract
 
-Follow best practices (bothin your chosen programming language and SPARQL) 
+Follow best practices (both in your chosen programming language and SPARQL)
 
 
 

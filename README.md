@@ -1,6 +1,6 @@
 # occ2abs_zh
 
-Toy application accepting occupations in zh-CN and returning names and abstracts from the dbpedia sparql endpoint
+Toy application accepting occupations in zh, ar, or ja and returning names and abstracts n English and that language from the dbpedia sparql endpoint
 
 ## Specification
 

@@ -16,6 +16,7 @@ $(document).ready(function(){
         search_params = {};
         search_params['occ'] = occ;
         search_params['sort_by'] = $('input[name=sort_options]:checked').val();
+        search_params['language'] = $('input[name=language_options]:checked').val();
         $.ajax({url:'people', data:search_params, datatype:"json"}).done(function(data){ $("#err-msg").html(''); display_people(data);  });
 
     }
@@ -23,7 +24,6 @@ $(document).ready(function(){
     var display_people = function(data){
 
         json_data = $.parseJSON(data);
-
         if(json_data.hasOwnProperty('err_msg')){
 
             alert("Error: " + json_data['err_msg']);
@@ -31,18 +31,30 @@ $(document).ready(function(){
         }
         else{
             $.each(json_data, function(index, item){
-                var name_zh = item["name_zh"]["value"];
-                var abstract_zh = item["abstract_zh"]["value"];
+                var name_zh = item["name"]["value"];
+                var abstract_zh = item["abstract"]["value"];
                 var name_en = item["name_en"]["value"]
                 var abstract_en = item["abstract_en"]["value"]
                 var tr = $("<tr></tr>");
-                $(tr).append("<td class=\"name-zh-simple\">" + name_zh + "</td>");
+                $(tr).append("<td class=\"name\">" + name_zh + "</td>");
                 $(tr).append("<td class=\"name-en\">" + name_en  + "</td>");
-                $(tr).append("<td class=\"abs-zh-simple\">" + abstract_zh + "</td>");
+                $(tr).append("<td class=\"abs\">" + abstract_zh + "</td>");
                 $(tr).append("<td class=\"abs-en\">" + abstract_en + "</td>");
                 $("#results-table tbody").append($(tr));
             })
          }
+         if($('input[name=language_options]:checked').val() == 'ar'){
+
+             $(".name").addClass("arabic");
+             $(".abs").addClass("arabic");
+
+         }
+         else{
+
+             $(".name").removeClass("arabic");
+             $(".abs").removeClass("arabic");
+
+            }
 
 
     }
@@ -68,8 +80,8 @@ $(document).ready(function(){
         var sort_array = []
         for (var i = 0; i < options.length; i++){
 
-            if(sort_preference == 'zh'){ sort_array.push($(options[i]).text()); }
-            else{ sort_array.push($(options[i]).val()) }
+            if(sort_preference == 'en'){ sort_array.push($(options[i]).val()) }
+            else{ sort_array.push($(options[i]).text()); }
 
         }
 
@@ -79,8 +91,8 @@ $(document).ready(function(){
 
             new_option = "";
 
-            if(sort_preference == 'zh'){ new_option = $("#occ-selector option").filter(function(){ return $(this).text() == sort_array[i]}).clone(); }
-            else{ new_option = $("#occ-selector option").filter(function(){ return $(this).val() == sort_array[i]}).clone();  }
+            if(sort_preference == 'en'){ new_option = $("#occ-selector option").filter(function(){ return $(this).val() == sort_array[i]}).clone();}
+            else{ new_option = $("#occ-selector option").filter(function(){ return $(this).text() == sort_array[i]}).clone(); }
             $(new_selector).append($(new_option));
         }
 
@@ -90,8 +102,18 @@ $(document).ready(function(){
         $(new_selector).change(launch_query);
     }
 
+    var change_language = function(){
+
+        var lang_code = $('input[name=language_options]:checked').val();
+        var current_location=window.location.href;
+        basepath = current_location.substring(0, current_location.lastIndexOf('/'));
+        lang_path = basepath + "/" + lang_code;
+        window.location.replace(lang_path);
+    }
+
     init();
     $("#occ-selector").change(launch_query);
     $("#sort-selector").change(change_sort_order)
+    $("#lang-selector").change(change_language)
 
 })

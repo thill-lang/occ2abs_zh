@@ -29,6 +29,8 @@ TODO: Support pinyin and traditional characters
 
 TODO: Improve filtering of occupations - many values are nonsense
 
+TODO: Evaluate RTL rendering
 
+TODO: Security: tighten screws on AJAX cleaning, accepted URLS.
 
 
